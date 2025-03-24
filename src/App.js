@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SearchIncidents from "./SearchIncidents";
+import MainWorkspace from "./MainWorkspace";
+import AICopilot from "./AICopilot";
+import Automations from "./Automation";
+import Settings from "./Settings";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SearchIncidents />} />
+        <Route path="/incident" element={<MainWorkspace />} />
+        <Route path="/ai-copilot" element={<AICopilot />} />
+        <Route path="/automations" element={<Automations />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
+// import React from 'react';
+// import Chatbot from './components/chatbot'; // ✅ lowercase file, uppercase component!
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <h1>Welcome to My Website</h1>
+//       <Chatbot />
+//     </div>
+//   );
+// }
+
+// export default App;
