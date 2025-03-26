@@ -9990,13 +9990,213 @@
         "prevention": "Implemented continuous monitoring of the DNS servers' network interfaces and system health.  Configured automated alerts for connectivity drops or performance degradation.  Regularly tested the failover mechanism to ensure redundancy and prevent future outages. Documented the entire incident and resolution process for future reference and training."
     },
     {
-        "id": "INC-1000",
-        "title": "Critical Database Server Outage - Production Impacted",
-        "status": "Resolved",
+        "id": "INC-1001",
+        "title": "Website Login Issues After Recent Update",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Users are unable to log in to the website after the latest update. Error messages related to authentication are being displayed. This is preventing users from accessing their accounts and completing transactions, causing disruption to online services."
+    },
+    {
+        "id": "INC-1002",
+        "title": "Slow Performance on Internal Database Queries",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Several users reported slow response times when querying the internal database. The issue seems to occur primarily during peak hours, leading to delays in accessing critical data for various business processes."
+    },
+    {
+        "id": "INC-1003",
+        "title": "Intermittent Access Issues to Cloud Services",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Users have reported intermittent access issues to the company's cloud-based file storage system. Sometimes the connection fails or times out, affecting work productivity and collaboration on shared files."
+    },
+    {
+        "id": "INC-1004",
+        "title": "Email Delivery Delays for External Recipients",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "There have been reports of delays in email deliveries to external recipients. Some users are experiencing significant lags, and the issue seems to be affecting important communications with clients."
+    },
+    {
+        "id": "INC-1005",
+        "title": "Inability to Sync Mobile App Data",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "Users are unable to sync their data between the mobile app and the central server. This issue has been observed across multiple devices and is preventing data updates on mobile devices."
+    },
+    {
+        "id": "INC-1006",
+        "title": "Network Latency Issues Affecting VoIP Calls",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Employees are experiencing significant network latency during VoIP calls, leading to poor audio quality, dropped calls, and delays. This is particularly noticeable during peak business hours."
+    },
+    {
+        "id": "INC-1007",
+        "title": "Access Denied to Internal CRM System",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Users are reporting access denial when trying to log in to the internal CRM system. The login page indicates insufficient permissions, despite users having the correct roles and privileges."
+    },
+    {
+        "id": "INC-1008",
+        "title": "Issues with Server-Side Caching on Web Portal",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "The web portal is showing outdated information due to issues with server-side caching. Users are seeing old data even after making changes, leading to confusion and errors in decision-making."
+    },
+    {
+        "id": "INC-1009",
+        "title": "Payment Gateway Integration Failure",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Transactions via the integrated payment gateway are failing intermittently. Some users are unable to complete purchases, resulting in lost sales and a negative customer experience."
+    },
+    {
+        "id": "INC-1010",
+        "title": "VPN Authentication Failures Across Multiple Locations",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Multiple users across different geographic locations are experiencing authentication failures when attempting to connect to the corporate VPN. This is hindering remote work and access to internal resources."
+    },
+    {
+        "id": "INC-1011",
+        "title": "Intermittent Downtime of Project Management Portal",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "The project management portal is experiencing intermittent downtime, causing issues with task tracking, project planning, and collaboration among team members."
+    },
+    {
+        "id": "INC-1012",
+        "title": "Website Images Not Loading Properly",
+        "status": "In Progress",
+        "priority": "Low",
+        "description": "Several users have reported issues with images not loading correctly on the company website. Some images appear broken or do not load at all, affecting the visual appeal and functionality of the site."
+    },
+    {
+        "id": "INC-1013",
+        "title": "API Response Delays Affecting Mobile App Functionality",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "The mobile app is experiencing delays in receiving API responses, causing slow functionality and lag when users attempt to interact with the app. This is disrupting user experience and engagement."
+    },
+    {
+        "id": "INC-1014",
+        "title": "Database Replication Lag Impacting Reporting Tools",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Database replication is experiencing lag, leading to delayed data updates in reporting tools. This is affecting the accuracy of reports and delaying decision-making processes for various departments."
+    },
+    {
+        "id": "INC-1015",
+        "title": "Failed Backups on Critical File Server",
+        "status": "In Progress",
         "priority": "Critical",
-        "description": "Production database server SQL01 experienced a complete outage at 03:00 AM EST, rendering critical applications unavailable. Users reported errors connecting to the database, and monitoring systems alerted to high CPU utilization and disk I/O prior to the outage. This incident severely impacted business operations, preventing order processing and customer access to online services.",
-        "root_cause": "The root cause was identified as a faulty RAID controller that experienced a hardware failure. This led to data corruption and subsequent database crash. The RAID controller's firmware was outdated and known to have stability issues.  Lack of proactive hardware monitoring further exacerbated the situation.",
-        "resolution": "The IT team immediately initiated disaster recovery procedures. A recent backup was restored to a standby server.  The faulty RAID controller was replaced with a new unit. Database integrity checks were performed, and application services were gradually restored.  Full functionality was restored by 08:00 AM EST. Post-incident review confirmed data consistency.",
-        "prevention": "A hardware refresh cycle for critical servers has been initiated, including proactive monitoring of RAID controller health and performance. Firmware updates will be applied promptly, and redundancy measures for critical database servers will be reviewed and enhanced."
+        "description": "Automated backups on the critical file server have failed multiple times. This poses a risk to data integrity and availability, as important business files may not be properly backed up."
+    },
+    {
+        "id": "INC-1016",
+        "title": "Slow Website Load Times During High Traffic Periods",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "Website load times are increasing significantly during high traffic periods, resulting in a degraded user experience and potentially affecting conversions and user engagement."
+    },
+    {
+        "id": "INC-1017",
+        "title": "Issues with User Permissions in Document Management System",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "Users are experiencing issues with document access permissions in the document management system. Certain users are unable to view or edit documents they previously had access to."
+    },
+    {
+        "id": "INC-1018",
+        "title": "Inconsistent Search Results in Internal Knowledge Base",
+        "status": "In Progress",
+        "priority": "Low",
+        "description": "Search results in the internal knowledge base are inconsistent. Some relevant articles are missing from search results, making it difficult for employees to find necessary information."
+    },
+    {
+        "id": "INC-1019",
+        "title": "Delayed Email Notifications in Collaboration Tools",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "Email notifications from collaboration tools are being delayed by up to several hours. This delay is impacting timely responses and coordination among teams."
+    },
+    {
+        "id": "INC-1020",
+        "title": "Authentication Issues with Single Sign-On (SSO)",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Multiple users are experiencing authentication issues when attempting to use Single Sign-On (SSO) to access various internal applications. The issue seems intermittent but is affecting productivity."
+    },
+    {
+        "id": "INC-1021",
+        "title": "Slow File Uploads to Cloud Storage",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "Users are reporting slow file upload speeds to the cloud storage system. This is affecting the ability to share and store files efficiently, especially with large files."
+    },
+    {
+        "id": "INC-1022",
+        "title": "Intermittent Disruptions in Customer Support Chat System",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "The customer support chat system is experiencing intermittent disruptions. Some messages are not being delivered, and customers are unable to receive timely assistance."
+    },
+    {
+        "id": "INC-1023",
+        "title": "Missing Employee Records in HR Management System",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Certain employee records are missing or incomplete in the HR management system. This is impacting HR processes such as payroll, benefits administration, and employee management."
+    },
+    {
+        "id": "INC-1024",
+        "title": "Content Delivery Network (CDN) Latency Issues",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "Users are experiencing increased latency when accessing media content hosted on the Content Delivery Network (CDN). This is affecting the streaming experience for video and audio content."
+    },
+    {
+        "id": "INC-1025",
+        "title": "Frequent Timeouts on Internal Application",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "The internal application is frequently timing out, making it difficult for users to complete tasks. This is especially problematic for employees working on time-sensitive projects."
+    },
+    {
+        "id": "INC-1026",
+        "title": "Issue with Printer Connectivity Across Multiple Departments",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "Multiple users across various departments are reporting issues with printer connectivity. Some printers are not responding, while others are displaying error messages when attempting to print documents."
+    },
+    {
+        "id": "INC-1027",
+        "title": "Slow Access to Shared Network Drives",
+        "status": "In Progress",
+        "priority": "Medium",
+        "description": "Users are experiencing slow access times when attempting to access files stored on the shared network drives. This is affecting daily workflow and collaboration."
+    },
+    {
+        "id": "INC-1028",
+        "title": "Security Vulnerabilities Detected in Web Application",
+        "status": "In Progress",
+        "priority": "Critical",
+        "description": "Security vulnerabilities have been detected in the web application, potentially exposing sensitive customer data. This is a high priority issue requiring immediate remediation."
+    },
+    {
+        "id": "INC-1029",
+        "title": "Failure to Load External APIs for Business Intelligence Tools",
+        "status": "In Progress",
+        "priority": "High",
+        "description": "Business intelligence tools are failing to load external APIs, causing disruptions in data visualization and reporting. This is hindering business decision-making."
+    },
+    {
+        "id": "INC-1030",
+        "title": "Multiple Users Unable to Access Company Wiki",
+        "status": "In Progress",
+        "priority": "Low",
+        "description": "Several users are unable to access the company wiki. They are encountering '403 Forbidden' errors when attempting to open the site, which is affecting internal knowledge sharing."
     }
 ]

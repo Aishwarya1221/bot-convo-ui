@@ -114,7 +114,7 @@ export default function MainWorkspace() {
       {/* Sidebar Drawer */}
       <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <List style={{ width: "250px" }}>
-          <ListItem button onClick={() => navigate("/")}>
+          <ListItem button onClick={() => navigate("/search")}>
             <ListItemText primary="Search Incidents" />
           </ListItem>
           {/* <ListItem button onClick={() => navigate("/ai-copilot")}>

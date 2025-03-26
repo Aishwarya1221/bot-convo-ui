@@ -33,8 +33,11 @@ export default function SearchIncidents() {
     setIncidents(mockIncidents); // Load mock data
   }, []);
 
-  const filteredIncidents = incidents.filter((incident) =>
-    incident.title.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filtering logic to only show incidents with ID starting with 'INC-1'
+  const filteredIncidents = incidents.filter(
+    (incident) =>
+      incident.id.toLowerCase().startsWith("inc-1") &&
+      incident.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const indexOfLastIncident = currentPage * incidentsPerPage;
