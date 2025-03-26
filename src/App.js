@@ -4,12 +4,14 @@ import MainWorkspace from "./MainWorkspace";
 import AICopilot from "./AICopilot";
 import Automations from "./Automation";
 import Settings from "./Settings";
+import LoginPage from "./LoginPage";
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SearchIncidents />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/search" element={<SearchIncidents />} />
         <Route path="/incident" element={<MainWorkspace />} />
         <Route path="/ai-copilot" element={<AICopilot />} />
         <Route path="/automations" element={<Automations />} />
