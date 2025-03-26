@@ -96,19 +96,19 @@ export default function SearchIncidents() {
             aria-label="menu"
             sx={{ mr: 2 }}
             onClick={(event) => setAnchorEl(event.currentTarget)} // Open menu on click
-          >
+            >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            </IconButton>
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Incident Management
-          </Typography>
-          <Avatar
+            </Typography>
+            <Avatar
             sx={{ bgcolor: "#ffffff", color: "rgb(183, 28, 28)", cursor: "pointer" }}
             onClick={handleAvatarClick}
-          >
+            >
             LC
-          </Avatar>
-          <Menu
+            </Avatar>
+            <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
@@ -120,36 +120,37 @@ export default function SearchIncidents() {
               vertical: "top",
               horizontal: "right",
             }}
-          >
+            >
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
             <MenuItem onClick={() => console.log("Profile clicked")}>Profile</MenuItem>
-          </Menu>
-        </Toolbar>
-      </AppBar>
+            </Menu>
+          </Toolbar>
+          </AppBar>
 
-        <Box sx={{ padding: "20px" }}>
-          <Grid container spacing={3}>
+
+          <Box sx={{ padding: "20px" }}>
+            <Grid container spacing={3}>
               <Grid item xs={12}>
               <Card sx={{ padding: "20px", boxShadow: 3, borderRadius: "12px" }}>
             <FormControl fullWidth>
             <InputLabel id="component-select-label">Select Component</InputLabel>
             <Select
               labelId="component-select-label"
-              value={selectedComponent}
+              value={selectedComponent || "CCSPARK"}
               onChange={(e) => setSelectedComponent(e.target.value)}
               label="Select Component"
               sx={{
               "& .MuiOutlinedInput-root": {
-                borderRadius: "8px",
+              borderRadius: "8px",
               },
               }}
             >
-              <MenuItem value="CCDCSN" selected>CCDCSN</MenuItem>
-              <MenuItem value="CCAP" disabled>
-              CCAP
+              <MenuItem value="CCSPARK">CCSPARK</MenuItem>
+              <MenuItem value="CCDASH" disabled>
+              CCDASH
               </MenuItem>
-              <MenuItem value="CCADMIN" disabled>
-              CCADMIN
+              <MenuItem value="CCREVERT" disabled>
+              CCREVERT
               </MenuItem>
             </Select>
             </FormControl>
