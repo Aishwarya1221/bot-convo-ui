@@ -1,10 +1,10 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, Typography, Button, Dialog, DialogTitle, DialogContent, CircularProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import { Card, CardContent, CardHeader, Typography, Button, Dialog, DialogTitle, DialogContent, CircularProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Drawer, AppBar, Toolbar, CssBaseline, List, ListItem, ListItemText } from "@mui/material";
+import { Close, Menu } from "@mui/icons-material";
 import { Search, Chat, Terminal, Settings } from "@mui/icons-material";
 import AICopilot from "./AICopilot";
-import { mockIncidents } from "./mockIncidents"; // Mock incident data
+import mockIncidents from "./incidents.json"; // Mock incident data
 import SummarizeRCA from "./SummarizeRCA"
 import HealthCheck from "./HealthCheck";
 
@@ -16,6 +16,7 @@ export default function MainWorkspace() {
   const [relatedIncidents, setRelatedIncidents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     const foundIncident = mockIncidents.find((inc) => inc.id === incidentId);
@@ -47,39 +48,41 @@ export default function MainWorkspace() {
   }
 
   return (
-    <div style={{ display: "flex", height: "100vh", backgroundColor: "#f5f5f5" }}>
-      {/* Sidebar */}
-      <aside style={{
-        width: "250px",
-        backgroundColor: "#b71c1c",
-        padding: "20px",
-        color: "#fff",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        height: "100vh",
-        overflowY: "auto",
-        boxShadow: "2px 0 5px rgba(0,0,0,0.2)"
-      }}>
-        <Typography variant="h6" style={{ fontWeight: "bold" }}>IPE Console</Typography>
-        <nav style={{ marginTop: "20px" }}>
-          <Button startIcon={<Search />} fullWidth style={{ color: "#FFD700", justifyContent: "flex-start" }} onClick={() => navigate("/")}>
-            Search Incidents
-          </Button>
-          <Button startIcon={<Chat />} fullWidth style={{ color: "#fff", justifyContent: "flex-start" }} onClick={() => navigate("/ai-copilot")}>
-            AI Copilot
-          </Button>
-          <Button startIcon={<Terminal />} fullWidth style={{ color: "#fff", justifyContent: "flex-start" }} onClick={() => navigate("/automations")}>
-            Automations
-          </Button>
-          <Button startIcon={<Settings />} fullWidth style={{ color: "#fff", justifyContent: "flex-start" }} onClick={() => navigate("/settings")}>
-            Settings
-          </Button>
-        </nav>
-      </aside>
+    <div style={{ display: "flex", height: "100vh", flexDirection: "column" }}>
+      <CssBaseline />
+      {/* Top Navigation Bar */}
+      <AppBar position="sticky" style={{ backgroundColor: "#b71c1c" }}>
+        <Toolbar>
+          {/* Hamburger Menu Icon */}
+          <IconButton edge="start" color="inherit" onClick={() => setDrawerOpen(true)} aria-label="menu">
+            <Menu />
+          </IconButton>
+          <Typography variant="h6" style={{ flexGrow: 1 }}>
+            Incident Management
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      {/* Sidebar Drawer (hidden initially, can be toggled via hamburger icon) */}
+      <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <List style={{ width: "250px" }}>
+          <ListItem button onClick={() => navigate("/")}>
+            <ListItemText primary="Search Incidents" />
+          </ListItem>
+          <ListItem button onClick={() => navigate("/ai-copilot")}>
+            <ListItemText primary="AI Copilot" />
+          </ListItem>
+          <ListItem button onClick={() => navigate("/automations")}>
+            <ListItemText primary="Automations" />
+          </ListItem>
+          <ListItem button onClick={() => navigate("/settings")}>
+            <ListItemText primary="Settings" />
+          </ListItem>
+        </List>
+      </Drawer>
 
       {/* Main Content */}
-      <div style={{ flex: 1, padding: "20px", marginLeft: "250px", overflowY: "auto", height: "100vh" }}>
+      <div style={{ flex: 1, padding: "20px", overflowY: "auto" }}>
         {/* Incident Details */}
         <Card style={{ borderLeft: "5px solid #FFD700", marginBottom: "20px" }}>
           <CardHeader title={incident.title} />

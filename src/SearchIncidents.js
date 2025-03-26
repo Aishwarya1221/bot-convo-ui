@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { mockIncidents } from "./mockIncidents"; // Import mock incident data
+import mockIncidents from "./incidents.json"; // Import mock incident data
 
 export default function SearchIncidents() {
   const [searchTerm, setSearchTerm] = useState("");
