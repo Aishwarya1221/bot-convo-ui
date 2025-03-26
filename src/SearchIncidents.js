@@ -127,37 +127,36 @@ export default function SearchIncidents() {
         </Toolbar>
       </AppBar>
 
-      {/* Main Content */}
-      <Box sx={{ padding: "20px" }}>
-        <Grid container spacing={3}>
-                <Grid item xs={12}>
-                <Card sx={{ padding: "20px", boxShadow: 3, borderRadius: "12px" }}>
-                  <FormControl fullWidth>
-                  <InputLabel id="component-select-label">Select Component</InputLabel>
-                  <Select
-                    labelId="component-select-label"
-                    value={selectedComponent}
-                    onChange={(e) => setSelectedComponent(e.target.value)}
-                    label="Select Component"
-                    sx={{
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: "8px",
-                    },
-                    }}
-                  >
-                    <MenuItem value="CCDCSN">CCDCSN</MenuItem>
-                    <MenuItem value="CCAP" disabled>
-                    CCAP
-                    </MenuItem>
-                    <MenuItem value="CCADMIN" disabled>
-                    CCADMIN
-                    </MenuItem>
-                  </Select>
-                  </FormControl>
-                </Card>
-                </Grid>
+        <Box sx={{ padding: "20px" }}>
+          <Grid container spacing={3}>
+              <Grid item xs={12}>
+              <Card sx={{ padding: "20px", boxShadow: 3, borderRadius: "12px" }}>
+            <FormControl fullWidth>
+            <InputLabel id="component-select-label">Select Component</InputLabel>
+            <Select
+              labelId="component-select-label"
+              value={selectedComponent}
+              onChange={(e) => setSelectedComponent(e.target.value)}
+              label="Select Component"
+              sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "8px",
+              },
+              }}
+            >
+              <MenuItem value="CCDCSN" selected>CCDCSN</MenuItem>
+              <MenuItem value="CCAP" disabled>
+              CCAP
+              </MenuItem>
+              <MenuItem value="CCADMIN" disabled>
+              CCADMIN
+              </MenuItem>
+            </Select>
+            </FormControl>
+              </Card>
+              </Grid>
 
-                {/* Search Bar */}
+              {/* Search Bar */}
           <Grid item xs={12}>
             <Card sx={{ padding: "20px", boxShadow: 3, borderRadius: "12px" }}>
               <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -183,7 +182,7 @@ export default function SearchIncidents() {
               <TableContainer component={Paper} sx={{ borderRadius: "12px" }}>
                 <Table>
                   <TableHead>
-                    <TableRow sx={{ backgroundColor: "rgb(249, 42, 6)" }}>
+                    <TableRow sx={{ backgroundColor: "rgb(183, 28, 28)" }}>
                       <TableCell sx={{ color: "#FFFFFF", fontWeight: "bold" }}>ID</TableCell>
                       <TableCell sx={{ color: "#FFFFFF", fontWeight: "bold" }}>Title</TableCell>
                       <TableCell sx={{ color: "#FFFFFF", fontWeight: "bold" }}>Status</TableCell>
