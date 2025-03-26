@@ -57,13 +57,22 @@ export default function MainWorkspace() {
 
     try {
       const response = await fetch("http://localhost:5000/get_related_incidents", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(incident.title),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(incident.title),
       });
 
       const data = await response.json();
-      setRelatedIncidents(data.related_incidents);
+
+      // Format and print the data for debugging
+      console.log("Related Incidents Data:", JSON.stringify(data, null, 2));
+
+      const formattedIncidents = data.related_incidents.map((inc) => ({
+        ...inc,
+        body: inc.body.replace(/\\n/g, '\n') // Replace \n with actual new lines
+            .replace(/(Title|Description|Root Cause|Resolution)/gi, '\n**$1**'), // Add a new line and bold the keywords
+      }));
+      setRelatedIncidents(formattedIncidents);
     } catch (error) {
       console.error("Error fetching related incidents:", error);
     } finally {
@@ -74,6 +83,18 @@ export default function MainWorkspace() {
   // Handle submit button click
   const handleSubmit = async () => {
     setLoadingSubmit(true); // Show loading spinner
+
+    // Get values from input fields
+    const rootCause = document.getElementById(":r1:").value;
+    const resolution = document.getElementById(":r2:").value;
+    const prevention = document.getElementById(":r3:").value;
+
+    // Check if all fields have text
+    if (!rootCause || !resolution || !prevention) {
+      alert("Please fill in required fields before submitting.");
+      setLoadingSubmit(false); // Hide loading spinner
+      return;
+    }
 
     // Simulate the submission process (e.g., an API call or state change)
     setTimeout(() => {
