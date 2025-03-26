@@ -6,6 +6,7 @@ import { Search, Chat, Terminal, Settings } from "@mui/icons-material";
 import AICopilot from "./AICopilot";
 import { mockIncidents } from "./mockIncidents"; // Mock incident data
 import SummarizeRCA from "./SummarizeRCA"
+import HealthCheck from "./HealthCheck";
 
 export default function MainWorkspace() {
   const navigate = useNavigate();
@@ -100,7 +101,7 @@ export default function MainWorkspace() {
             <CardHeader title="Agentic Automations" />
             <CardContent>
               <Button fullWidth variant="contained" style={{ backgroundColor: "#FFD700", color: "#000", marginBottom: "10px" }}>
-                Run Health Check
+                <HealthCheck />
               </Button>
               <Button fullWidth variant="contained" style={{ backgroundColor: "#FFD700", color: "#000", marginBottom: "10px" }}>
                 <SummarizeRCA incident={incident} />
