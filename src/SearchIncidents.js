@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Pagination } from "@mui/material";
-import { mockIncidents } from "./mockIncidents"; // Import mock incident data
+import mockIncidents from "./incidents.json"; // Import mock incident data
 
 export default function SearchIncidents() {
   const [searchTerm, setSearchTerm] = useState("");
