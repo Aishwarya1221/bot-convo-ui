@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, Typography, TextField, Button, List, ListItem, ListItemText } from "@mui/material";
+import { Card, CardContent, CardHeader, Typography, TextField, Button, List, ListItem, ListItemText, CircularProgress } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
 export default function AICopilot() {
@@ -7,20 +7,41 @@ export default function AICopilot() {
     { sender: "AI", text: "Hello! How can I assist you with your incident?" },
   ]);
   const [input, setInput] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!input.trim()) return;
 
     const userMessage = { sender: "You", text: input };
     setMessages((prev) => [...prev, userMessage]);
-
-    // Simulated AI response (Replace with real AI backend integration)
-    setTimeout(() => {
-      const aiResponse = { sender: "AI", text: "Processing your request..." };
-      setMessages((prev) => [...prev, aiResponse]);
-    }, 1000);
-
     setInput("");
+
+    // Show processing icon
+    setIsProcessing(true);
+
+    try {
+      // Make API call to chatbot backend
+      const response = await fetch("http://localhost:5000/chatbot_text", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_message: input }),
+      });
+
+      const data = await response.json();
+
+      // Add AI response to chat
+      const aiResponse = { sender: "AI", text: data.bot_response || "Sorry, I couldn't process your request." };
+      setMessages((prev) => [...prev, aiResponse]);
+    } catch (error) {
+      // Handle error
+      const errorMessage = { sender: "AI", text: "An error occurred while processing your request." };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      // Hide processing icon
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -35,6 +56,11 @@ export default function AICopilot() {
               <ListItemText primary={<strong>{msg.sender}</strong>} secondary={msg.text} />
             </ListItem>
           ))}
+          {isProcessing && (
+            <ListItem style={{ textAlign: "left" }}>
+              <CircularProgress size={20} />
+            </ListItem>
+          )}
         </List>
       </CardContent>
 

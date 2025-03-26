@@ -1,22 +1,45 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, Typography, Button } from "@mui/material";
+import { Card, CardContent, CardHeader, Typography, Button, Dialog, DialogTitle, DialogContent, CircularProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from "@mui/material";
+import { Close } from "@mui/icons-material";
 import { Search, Chat, Terminal, Settings } from "@mui/icons-material";
 import AICopilot from "./AICopilot";
 import { mockIncidents } from "./mockIncidents"; // Mock incident data
-import IncidentDetails from "./IncidentDetails";
+import SummarizeRCA from "./SummarizeRCA"
 
 export default function MainWorkspace() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const incidentId = searchParams.get("id"); // Get incident ID from URL
+  const incidentId = searchParams.get("id");
   const [incident, setIncident] = useState(null);
+  const [relatedIncidents, setRelatedIncidents] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    // Fetch the selected incident based on the ID
     const foundIncident = mockIncidents.find((inc) => inc.id === incidentId);
     setIncident(foundIncident);
   }, [incidentId]);
+
+  const fetchRelatedIncidents = async () => {
+    setLoading(true);
+    setOpenModal(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/get_related_incidents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(incident.title)
+      });
+
+      const data = await response.json();
+      setRelatedIncidents(data.related_incidents);
+    } catch (error) {
+      console.error("Error fetching related incidents:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!incident) {
     return <Typography variant="h6" style={{ textAlign: "center", marginTop: "50px" }}>Incident not found.</Typography>;
@@ -24,9 +47,9 @@ export default function MainWorkspace() {
 
   return (
     <div style={{ display: "flex", height: "100vh", backgroundColor: "#f5f5f5" }}>
-      {/* Sidebar (Fixed) */}
+      {/* Sidebar */}
       <aside style={{
-        width: "200px",
+        width: "250px",
         backgroundColor: "#b71c1c",
         padding: "20px",
         color: "#fff",
@@ -39,7 +62,7 @@ export default function MainWorkspace() {
       }}>
         <Typography variant="h6" style={{ fontWeight: "bold" }}>IPE Console</Typography>
         <nav style={{ marginTop: "20px" }}>
-        <Button startIcon={<Search />} fullWidth style={{ color: "#FFD700", justifyContent: "flex-start" }} onClick={() => navigate("/")}>
+          <Button startIcon={<Search />} fullWidth style={{ color: "#FFD700", justifyContent: "flex-start" }} onClick={() => navigate("/")}>
             Search Incidents
           </Button>
           <Button startIcon={<Chat />} fullWidth style={{ color: "#fff", justifyContent: "flex-start" }} onClick={() => navigate("/ai-copilot")}>
@@ -54,23 +77,22 @@ export default function MainWorkspace() {
         </nav>
       </aside>
 
-      {/* Main Content (Scrollable) */}
+      {/* Main Content */}
       <div style={{ flex: 1, padding: "20px", marginLeft: "250px", overflowY: "auto", height: "100vh" }}>
         {/* Incident Details */}
         <Card style={{ borderLeft: "5px solid #FFD700", marginBottom: "20px" }}>
           <CardHeader title={incident.title} />
           <CardContent>
+            <Typography><strong>ID:</strong> {incident.id}</Typography>
             <Typography><strong>Status:</strong> {incident.status}</Typography>
             <Typography><strong>Priority:</strong> {incident.priority}</Typography>
             <Typography><strong>Description:</strong> {incident.description}</Typography>
           </CardContent>
         </Card>
 
-        {/* <IncidentDetails/> */}
-
         {/* AI Copilot & Automation */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-          {/* AI Chatbot Panel */}
+          {/* AI Chatbot */}
           <AICopilot />
 
           {/* Automations Panel */}
@@ -80,12 +102,58 @@ export default function MainWorkspace() {
               <Button fullWidth variant="contained" style={{ backgroundColor: "#FFD700", color: "#000", marginBottom: "10px" }}>
                 Run Health Check
               </Button>
-              <Button fullWidth variant="contained" style={{ backgroundColor: "#FFD700", color: "#000" }}>
-                Summarize RCA
+              <Button fullWidth variant="contained" style={{ backgroundColor: "#FFD700", color: "#000", marginBottom: "10px" }}>
+                <SummarizeRCA incident={incident} />
+              </Button>
+              <Button fullWidth variant="contained" style={{ backgroundColor: "#FFD700", color: "#000" }} onClick={fetchRelatedIncidents}>
+                Get Related Incidents
               </Button>
             </CardContent>
           </Card>
         </div>
+
+        {/* Related Incidents Modal */}
+        <Dialog open={openModal} onClose={() => setOpenModal(false)} maxWidth="md" fullWidth>
+          <DialogTitle>
+            Related Incidents
+            <IconButton style={{ position: "absolute", right: 10, top: 10 }} onClick={() => setOpenModal(false)}>
+              <Close />
+            </IconButton>
+          </DialogTitle>
+          <DialogContent>
+            {loading ? (
+              <div style={{ textAlign: "center", padding: "20px" }}>
+                <CircularProgress />
+                <Typography>Fetching related incidents...</Typography>
+              </div>
+            ) : (
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell><strong>ID</strong></TableCell>
+                      <TableCell><strong>Title</strong></TableCell>
+                      <TableCell><strong>Action</strong></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {relatedIncidents.map((inc) => (
+                      <TableRow key={inc.id}>
+                        <TableCell>{inc.id}</TableCell>
+                        <TableCell>{inc.body}</TableCell>
+                        <TableCell>
+                          <Button variant="contained" color="primary" onClick={() => navigate(`/incident?id=${inc.id}`)}>
+                            View Incident
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
