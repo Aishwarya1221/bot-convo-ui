@@ -196,15 +196,16 @@ export default function MainWorkspace() {
             position: "fixed",
             bottom: "20px",
             right: "20px",
-            backgroundColor: "#FFD700",
+            backgroundColor: "#FF0000",
             color: "#000",
             borderRadius: "50%",
-            padding: "10px",
+            padding: "20px",
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            zIndex: 1000
           }}
           onClick={() => setOpenCopilot(true)}
         >
-          <ChatIcon />
+          <ChatIcon style={{ fontSize: "2.5rem" }}/>
         </IconButton>
 
         {/* AI Copilot Popup (Dialog positioned near the bottom right) */}
